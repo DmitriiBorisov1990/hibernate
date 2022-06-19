@@ -3,5 +3,20 @@ CREATE SCHEMA employee_storage;
 SET SEARCH_PATH = employee_storage;
 CREATE TABLE employee(
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(128) NOT NULL
+    name VARCHAR(128) NOT NULL,
+    gender VARCHAR(8),
+    birth_day DATE,
+    city VARCHAR(64),
+    street VARCHAR(64),
+    work_city VARCHAR(64),
+    work_street VARCHAR(64)
 );
+
+CREATE TABLE employee_storage.employee_lang(
+    employee_id BIGINT REFERENCES employee_storage.employee(id),
+    lang VARCHAR(3),
+    description VARCHAR(128) NOT NULL,
+    PRIMARY KEY (employee_id,lang)
+);
+DROP TABLE employee_storage.employee;
+DROP TABLE employee_storage.employee_lang;
